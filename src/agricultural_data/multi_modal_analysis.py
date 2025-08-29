@@ -48,7 +48,7 @@ class MultiModalAgriculturalAnalyzer:
         Returns:
             Dictionary containing RGB analysis results
         """
-        print("🔴 Analyzing RGB agricultural imagery...")
+        print("Analyzing RGB agricultural imagery...")
         
         # Ensure correct shape (N, 3, H, W)
         if rgb_data.ndim == 4 and rgb_data.shape[-1] == 3:
@@ -102,7 +102,7 @@ class MultiModalAgriculturalAnalyzer:
         overall_stats["quality_issues"] = quality_issues
         overall_stats["quality_score"] = max(0, 10 - len(quality_issues))
         
-        print(f"✅ RGB analysis completed for {N} images ({H}x{W})")
+        print(f"RGB analysis completed for {N} images ({H}x{W})")
         return overall_stats
     
     def analyze_ndvi_data(self, ndvi_data: np.ndarray) -> Dict[str, Any]:
@@ -115,7 +115,7 @@ class MultiModalAgriculturalAnalyzer:
         Returns:
             Dictionary containing NDVI analysis results
         """
-        print("🟢 Analyzing NDVI agricultural imagery...")
+        print("Analyzing NDVI agricultural imagery...")
         
         if not (ndvi_data.ndim == 3):
             return {"error": f"Invalid NDVI shape: {ndvi_data.shape}"}
@@ -182,7 +182,7 @@ class MultiModalAgriculturalAnalyzer:
         ndvi_stats["quality_issues"] = quality_issues
         ndvi_stats["quality_score"] = max(0, 10 - len(quality_issues))
         
-        print(f"✅ NDVI analysis completed for {N} images ({H}x{W})")
+        print(f"NDVI analysis completed for {N} images ({H}x{W})")
         return ndvi_stats
     
     def analyze_multi_modal_correlation(self, 
@@ -198,7 +198,7 @@ class MultiModalAgriculturalAnalyzer:
         Returns:
             Dictionary containing correlation analysis results
         """
-        print("🔗 Analyzing RGB-NDVI correlations...")
+        print("Analyzing RGB-NDVI correlations...")
         
         if not (rgb_data.ndim == 4 and ndvi_data.ndim == 3):
             return {"error": "Invalid data dimensions for correlation analysis"}
@@ -253,7 +253,7 @@ class MultiModalAgriculturalAnalyzer:
             }
         }
         
-        print(f"✅ Correlation analysis completed for {N} images")
+        print(f"Correlation analysis completed for {N} images")
         return correlation_analysis
     
     def generate_multi_modal_report(self, 
@@ -272,12 +272,12 @@ class MultiModalAgriculturalAnalyzer:
             Formatted report string
         """
         report_lines = []
-        report_lines.append("🔴🟢 MULTI-MODAL AGRICULTURAL ANALYSIS REPORT")
+        report_lines.append("MULTI-MODAL AGRICULTURAL ANALYSIS REPORT")
         report_lines.append("=" * 60)
         
         # RGB Analysis Summary
         if "error" not in rgb_analysis:
-            report_lines.append("🔴 RGB ANALYSIS SUMMARY")
+            report_lines.append("RGB ANALYSIS SUMMARY")
             report_lines.append("-" * 30)
             report_lines.append(f"Total Images: {rgb_analysis.get('total_images', 'N/A')}")
             report_lines.append(f"Image Dimensions: {rgb_analysis.get('image_dimensions', 'N/A')}")
@@ -294,14 +294,14 @@ class MultiModalAgriculturalAnalyzer:
                 for channel, stats in rgb_analysis['channel_statistics'].items():
                     report_lines.append(f"  {channel}: mean={stats['mean']:.3f}, std={stats['std']:.3f}")
         else:
-            report_lines.append("🔴 RGB Analysis: ❌ Failed")
+            report_lines.append("RGB Analysis: Failed")
             report_lines.append(f"  Error: {rgb_analysis['error']}")
         
         report_lines.append("")
         
         # NDVI Analysis Summary
         if "error" not in ndvi_analysis:
-            report_lines.append("🟢 NDVI ANALYSIS SUMMARY")
+            report_lines.append("NDVI ANALYSIS SUMMARY")
             report_lines.append("-" * 30)
             report_lines.append(f"Total Images: {ndvi_analysis.get('total_images', 'N/A')}")
             report_lines.append(f"Image Dimensions: {ndvi_analysis.get('image_dimensions', 'N/A')}")
@@ -320,12 +320,12 @@ class MultiModalAgriculturalAnalyzer:
                 report_lines.append(f"  Moderate Vegetation (0.2-0.6): {range_stats.get('moderate_vegetation', 0):,}")
                 report_lines.append(f"  Low Vegetation (0-0.2): {range_stats.get('low_vegetation', 0):,}")
         else:
-            report_lines.append("🟢 NDVI Analysis: ❌ Failed")
+            report_lines.append("NDVI Analysis: Failed")
             report_lines.append(f"  Error: {ndvi_analysis['error']}")
         
         # Correlation Analysis Summary
         if correlation_analysis and "error" not in correlation_analysis:
-            report_lines.append("\n🔗 CORRELATION ANALYSIS SUMMARY")
+            report_lines.append("\nCORRELATION ANALYSIS SUMMARY")
             report_lines.append("-" * 30)
             
             overall_corr = correlation_analysis.get('overall_correlation', {})
@@ -361,23 +361,23 @@ class MultiModalAgriculturalAnalyzer:
             with open(output_path, 'w') as f:
                 json.dump(analysis_results, f, indent=2, default=str)
             
-            print(f"💾 Analysis results saved to: {output_path}")
+            print(f"Analysis results saved to: {output_path}")
             return str(output_path)
             
         except Exception as e:
-            print(f"❌ Failed to save analysis results: {e}")
+            print(f"Failed to save analysis results: {e}")
             return None
 
 def main():
     """Example usage of the MultiModalAgriculturalAnalyzer."""
-    print("🔴🟢 Multi-Modal Agricultural Analysis Example")
+    print("Multi-Modal Agricultural Analysis Example")
     print("=" * 60)
     
     # Initialize analyzer
     analyzer = MultiModalAgriculturalAnalyzer()
     
     # Generate synthetic data for demonstration
-    print("\n📊 Generating synthetic multi-modal data for demonstration...")
+    print("\nGenerating synthetic multi-modal data for demonstration...")
     
     N, H, W = 100, 64, 64
     
@@ -392,26 +392,26 @@ def main():
     ndvi_data = 0.3 * green_channel + 0.7 * ndvi_data
     ndvi_data = np.clip(ndvi_data, -1, 1)
     
-    print(f"✅ Generated synthetic data: {N} images, {H}x{W} pixels")
+    print(f"Generated synthetic data: {N} images, {H}x{W} pixels")
     
     # Analyze RGB data
-    print("\n1️⃣ Analyzing RGB data...")
+    print("\n1. Analyzing RGB data...")
     rgb_analysis = analyzer.analyze_rgb_data(rgb_data)
     
     # Analyze NDVI data
-    print("\n2️⃣ Analyzing NDVI data...")
+    print("\n2. Analyzing NDVI data...")
     ndvi_analysis = analyzer.analyze_ndvi_data(ndvi_data)
     
     # Analyze correlations
-    print("\n3️⃣ Analyzing RGB-NDVI correlations...")
+    print("\n3. Analyzing RGB-NDVI correlations...")
     correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_data)
     
     # Generate comprehensive report
-    print("\n4️⃣ Generating multi-modal analysis report...")
+    print("\n4. Generating multi-modal analysis report...")
     report = analyzer.generate_multi_modal_report(rgb_analysis, ndvi_analysis, correlation_analysis)
     
     # Save results
-    print("\n5️⃣ Saving analysis results...")
+    print("\n5. Saving analysis results...")
     all_results = {
         "rgb_analysis": rgb_analysis,
         "ndvi_analysis": ndvi_analysis,
@@ -428,7 +428,7 @@ def main():
     # Display report
     print(f"\n{report}")
     
-    print("\n✅ Multi-modal agricultural analysis example completed!")
+    print("\nMulti-modal agricultural analysis example completed!")
 
 if __name__ == "__main__":
     main()

@@ -5,30 +5,18 @@ This directory contains sample datasets and examples for testing the Agricultura
 ## Contents
 
 - **README.md**: This file
-- **synthetic_example.py**: Script to generate synthetic agricultural data
-- **npz_data_loading_example.py**: **NEW!** Practical example of loading and processing NPZ data
+- **npz_data_loading_example.py**: Practical example of loading and processing NPZ data
 
 ## Quick Start
 
-### 1. Generate Sample Data
-```bash
-python synthetic_example.py
-```
-
-### 2. Load and Process NPZ Data
+### Load and Process NPZ Data
 ```bash
 python npz_data_loading_example.py
 ```
 
 ## What Each Script Does
 
-### **synthetic_example.py**
-- Creates synthetic RGB, NDVI, and cloud mask data
-- Saves data in NPZ format (industry standard)
-- Generates metadata and statistics
-- Output: `synthetic_agricultural_dataset.npz`
-
-### **npz_data_loading_example.py** ⭐ **NEW!**
+### **npz_data_loading_example.py**
 - **Loads NPZ files** and extracts data arrays
 - **Processes multi-spectral data** (RGB + NDVI)
 - **Calculates statistics** for each modality
@@ -115,7 +103,7 @@ Use these examples to:
 - **Learn NPZ data handling** patterns
 - **Develop your own analysis pipelines**
 - **Validate tool functionality**
-- **Understand agricultural data formats**
+- **Understand  agricultural data formats**
 - **Practice multi-spectral data processing**
 
 ## Requirements
@@ -123,7 +111,6 @@ Use these examples to:
 - NumPy for data handling
 - Matplotlib for visualizations
 - Pathlib for file operations
-- All showcase modules (imported from parent directory)
 
 ## Note
 
@@ -133,6 +120,5 @@ These are synthetic datasets for demonstration purposes. Real agricultural data 
 
 After running these examples:
 1. **Modify the scripts** for your specific data
-2. **Integrate with the showcase tools** for validation and analysis
-3. **Apply to real agricultural datasets** from your research
-4. **Extend the functionality** for your specific use cases
+2. **Apply to real agricultural datasets** from your research
+3. **Extend the functionality** for your specific use cases

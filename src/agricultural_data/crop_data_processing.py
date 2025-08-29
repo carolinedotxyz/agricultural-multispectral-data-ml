@@ -55,7 +55,7 @@ class AgriculturalDataProcessor:
         Returns:
             Dictionary containing balanced dataset and metadata
         """
-        print("🌾 Creating balanced agricultural dataset...")
+        print("Creating balanced agricultural dataset...")
         
         # Determine target size per crop
         if target_size is None:
@@ -80,15 +80,15 @@ class AgriculturalDataProcessor:
             if len(crop_array) > target_size:
                 indices = random.sample(range(len(crop_array)), target_size)
                 balanced_data[crop_name] = crop_array[indices]
-                print(f"    ✅ Subsampled {target_size} samples from {len(crop_array)} available")
+                print(f"    Subsampled {target_size} samples from {len(crop_array)} available")
             else:
                 balanced_data[crop_name] = crop_array
-                print(f"    ⚠️  Only {len(crop_array)} samples available, using all")
+                print(f"    Only {len(crop_array)} samples available, using all")
             
             metadata["crop_distribution"][crop_name] = len(balanced_data[crop_name])
             metadata["total_samples"] += len(balanced_data[crop_name])
         
-        print(f"✅ Balanced dataset created with {metadata['total_samples']} total samples")
+        print(f"Balanced dataset created with {metadata['total_samples']} total samples")
         return {"data": balanced_data, "metadata": metadata}
     
     def create_variable_sized_dataset(self, 
@@ -106,7 +106,7 @@ class AgriculturalDataProcessor:
         Returns:
             Dictionary containing variable-sized dataset and metadata
         """
-        print("🌾 Creating variable-sized agricultural dataset...")
+        print("Creating variable-sized agricultural dataset...")
         
         variable_data = {}
         metadata = {
@@ -132,15 +132,15 @@ class AgriculturalDataProcessor:
             if available_samples > target_size:
                 indices = random.sample(range(available_samples), target_size)
                 variable_data[crop_name] = crop_array[indices]
-                print(f"    ✅ Subsampled {target_size} samples from {available_samples} available")
+                print(f"    Subsampled {target_size} samples from {available_samples} available")
             else:
                 variable_data[crop_name] = crop_array
-                print(f"    ⚠️  Only {available_samples} samples available, using all")
+                print(f"    Warning: Only {available_samples} samples available, using all")
             
             metadata["crop_distribution"][crop_name] = len(variable_data[crop_name])
             metadata["total_samples"] += len(variable_data[crop_name])
         
-        print(f"✅ Variable-sized dataset created with {metadata['total_samples']} total samples")
+        print(f"Variable-sized dataset created with {metadata['total_samples']} total samples")
         return {"data": variable_data, "metadata": metadata}
     
     def create_data_splits(self, 
@@ -210,7 +210,7 @@ class AgriculturalDataProcessor:
         for split_name in split_indices:
             split_indices[split_name] = np.array(split_indices[split_name], dtype=np.int64)
         
-        print(f"✅ Data splits created:")
+        print(f"Data splits created:")
         print(f"  Train: {len(split_indices['train'])} samples")
         print(f"  Validation: {len(split_indices['validation'])} samples")
         print(f"  Test: {len(split_indices['test'])} samples")
@@ -246,13 +246,13 @@ class AgriculturalDataProcessor:
             with open(metadata_path, 'w') as f:
                 json.dump(dataset["metadata"], f, indent=2)
             
-            print(f"💾 Dataset saved to: {output_path}")
-            print(f"📄 Metadata saved to: {metadata_path}")
+            print(f"Dataset saved to: {output_path}")
+            print(f"Metadata saved to: {metadata_path}")
             
             return str(output_path)
             
         except Exception as e:
-            print(f"❌ Failed to save dataset: {e}")
+            print(f"Failed to save dataset: {e}")
             return None
     
     def load_and_validate_dataset(self, file_path: str) -> Dict[str, Any]:
@@ -265,7 +265,7 @@ class AgriculturalDataProcessor:
         Returns:
             Dictionary containing loaded data and validation results
         """
-        print(f"🔍 Loading and validating dataset: {file_path}")
+        print(f"Loading and validating dataset: {file_path}")
         
         try:
             # Load data
@@ -295,12 +295,12 @@ class AgriculturalDataProcessor:
                 if np.any(np.isnan(array)):
                     validation_results["validation_issues"].append(f"NaN values found in key: {key}")
             
-            print(f"✅ Dataset loaded successfully")
+            print(f"Dataset loaded successfully")
             print(f"  Keys: {', '.join(validation_results['data_keys'])}")
-            print(f"  Metadata: {'✅' if metadata else '❌'}")
+            print(f"  Metadata: {'Available' if metadata else 'Not available'}")
             
             if validation_results["validation_issues"]:
-                print(f"⚠️  Validation issues found:")
+                print(f"Validation issues found:")
                 for issue in validation_results["validation_issues"]:
                     print(f"    - {issue}")
             
@@ -311,7 +311,7 @@ class AgriculturalDataProcessor:
             }
             
         except Exception as e:
-            print(f"❌ Failed to load dataset: {e}")
+            print(f"Failed to load dataset: {e}")
             return {
                 "data": None,
                 "metadata": None,
@@ -329,7 +329,7 @@ class AgriculturalDataProcessor:
             Formatted report string
         """
         if not dataset_info.get("metadata"):
-            return "❌ No metadata available for report generation"
+            return "No metadata available for report generation"
         
         metadata = dataset_info["metadata"]
         
@@ -392,7 +392,7 @@ def main():
     processor = AgriculturalDataProcessor()
     
     # Example: Create synthetic crop data for demonstration
-    print("\n📊 Creating synthetic crop data for demonstration...")
+    print("\nCreating synthetic crop data for demonstration...")
     
     # Generate synthetic data (in real usage, this would load from files)
     synthetic_crops = {
@@ -403,34 +403,34 @@ def main():
     }
     
     # Create balanced dataset
-    print("\n1️⃣ Creating balanced dataset...")
+    print("\n1️. Creating balanced dataset...")
     balanced_dataset = processor.create_balanced_dataset(synthetic_crops, target_size=300)
     
     # Create variable-sized dataset
-    print("\n2️⃣ Creating variable-sized dataset...")
+    print("\n2️. Creating variable-sized dataset...")
     variable_dataset = processor.create_variable_sized_dataset(synthetic_crops, min_samples=75, max_samples=500)
     
     # Create data splits
-    print("\n3️⃣ Creating data splits...")
+    print("\n3️. Creating data splits...")
     splits = processor.create_data_splits(balanced_dataset["data"])
     
     # Save datasets
-    print("\n4️⃣ Saving processed datasets...")
+    print("\n4️. Saving processed datasets...")
     processor.save_processed_dataset(balanced_dataset, "balanced_agricultural_dataset.npz")
     processor.save_processed_dataset(variable_dataset, "variable_agricultural_dataset.npz")
     
     # Load and validate
-    print("\n5️⃣ Loading and validating saved dataset...")
+    print("\n5️. Loading and validating saved dataset...")
     loaded_dataset = processor.load_and_validate_dataset(
         str(processor.output_dir / "balanced_agricultural_dataset.npz")
     )
     
     # Generate report
-    print("\n6️⃣ Generating dataset report...")
+    print("\n6️. Generating dataset report...")
     report = processor.generate_dataset_report(loaded_dataset)
     print(f"\n{report}")
     
-    print("\n✅ Agricultural data processing example completed!")
+    print("\nAgricultural data processing example completed!")
 
 if __name__ == "__main__":
     main()

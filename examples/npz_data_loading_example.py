@@ -21,7 +21,7 @@ def load_agricultural_npz_dataset(file_path: str):
     Returns:
         Dictionary containing loaded data and metadata
     """
-    print(f"📂 Loading agricultural dataset: {file_path}")
+    print(f"Loading agricultural dataset: {file_path}")
     
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Dataset file not found: {file_path}")
@@ -31,11 +31,11 @@ def load_agricultural_npz_dataset(file_path: str):
     data = np.load(file_path, allow_pickle=False)
     load_time = time.time() - start_time
     
-    print(f"✅ Dataset loaded in {load_time:.3f} seconds")
+    print(f"Dataset loaded in {load_time:.3f} seconds")
     
     # Extract available keys
     available_keys = list(data.keys())
-    print(f"📁 Available data keys: {available_keys}")
+    print(f"Available data keys: {available_keys}")
     
     # Load individual arrays
     dataset = {}
@@ -59,7 +59,7 @@ def process_multi_spectral_data(dataset: dict):
     Returns:
         Dictionary containing processed data and statistics
     """
-    print("\n🔍 Processing multi-spectral data...")
+    print("\nProcessing multi-spectral data...")
     
     processed_data = {}
     statistics = {}
@@ -67,12 +67,12 @@ def process_multi_spectral_data(dataset: dict):
     # Process RGB data if available
     if 'rgb' in dataset:
         rgb_data = dataset['rgb']
-        print(f"🔴 Processing RGB data: {rgb_data.shape}")
+        print(f"Processing RGB data: {rgb_data.shape}")
         
         # Ensure correct format (N, 3, H, W)
         if rgb_data.ndim == 4 and rgb_data.shape[-1] == 3:
             rgb_data = np.transpose(rgb_data, (0, 3, 1, 2))
-            print(f"  → Transposed to (N, 3, H, W) format")
+            print(f"  Transposed to (N, 3, H, W) format")
         
         # Calculate RGB statistics
         rgb_stats = {
@@ -93,7 +93,7 @@ def process_multi_spectral_data(dataset: dict):
     # Process NDVI data if available
     if 'ndvi' in dataset:
         ndvi_data = dataset['ndvi']
-        print(f"🟢 Processing NDVI data: {ndvi_data.shape}")
+        print(f"Processing NDVI data: {ndvi_data.shape}")
         
         # Calculate NDVI statistics
         ndvi_stats = {
@@ -119,7 +119,7 @@ def process_multi_spectral_data(dataset: dict):
     # Process cloud mask if available
     if 'cloud_mask' in dataset:
         cloud_data = dataset['cloud_mask']
-        print(f"☁️  Processing cloud mask: {cloud_data.shape}")
+        print(f"Processing cloud mask: {cloud_data.shape}")
         
         # Calculate cloud coverage
         cloud_coverage = np.mean(cloud_data)
@@ -148,7 +148,7 @@ def visualize_agricultural_data(processed_data: dict, sample_index: int = 0):
         processed_data: Dictionary containing processed data
         sample_index: Index of the sample to visualize
     """
-    print(f"\n🎨 Creating visualizations for sample {sample_index}...")
+    print(f"\nCreating visualizations for sample {sample_index}...")
     
     fig, axes = plt.subplots(2, 3, figsize=(18, 12))
     fig.suptitle(f'Multi-Spectral Agricultural Data Visualization (Sample {sample_index})', fontsize=16)
@@ -205,7 +205,7 @@ def save_processed_data(processed_data: dict, output_dir: str = "./processed_out
         processed_data: Dictionary containing processed data
         output_dir: Directory to save processed data
     """
-    print(f"\n💾 Saving processed data to: {output_dir}")
+    print(f"\nSaving processed data to: {output_dir}")
     
     output_path = Path(output_dir)
     output_path.mkdir(exist_ok=True)
@@ -225,47 +225,47 @@ def save_processed_data(processed_data: dict, output_dir: str = "./processed_out
 
 def main():
     """Main function demonstrating NPZ data loading and processing."""
-    print("🌾 Agricultural NPZ Data Loading Example")
+    print("Agricultural NPZ Data Loading Example")
     print("=" * 60)
     
     # Check if we have a sample dataset, if not create one
     sample_dataset_path = "synthetic_agricultural_dataset.npz"
     
     if not os.path.exists(sample_dataset_path):
-        print("📊 No sample dataset found. Creating synthetic data first...")
-        from synthetic_example import generate_synthetic_agricultural_data
+        print("No sample dataset found. Creating synthetic data first...")
+        from .synthetic_example import generate_synthetic_agricultural_data
         output_dir = generate_synthetic_agricultural_data()
         sample_dataset_path = output_dir / "synthetic_agricultural_dataset.npz"
     
     try:
         # 1. Load the NPZ dataset
-        print("\n1️⃣ Loading NPZ dataset...")
+        print("\n1. Loading NPZ dataset...")
         dataset = load_agricultural_npz_dataset(str(sample_dataset_path))
         
         # 2. Process the multi-spectral data
-        print("\n2️⃣ Processing multi-spectral data...")
+        print("\n2. Processing multi-spectral data...")
         processed_data, statistics = process_multi_spectral_data(dataset)
         
         # 3. Display summary statistics
-        print("\n3️⃣ Data Summary:")
+        print("\n3. Data Summary:")
         total_samples = len(next(iter(processed_data.values())))
         print(f"   Total samples: {total_samples}")
         print(f"   Data modalities: {list(processed_data.keys())}")
         
         # 4. Create visualizations
-        print("\n4️⃣ Creating visualizations...")
+        print("\n4. Creating visualizations...")
         visualize_agricultural_data(processed_data)
         
         # 5. Save processed data
-        print("\n5️⃣ Saving processed data...")
+        print("\n5. Saving processed data...")
         output_path = save_processed_data(processed_data)
         
-        print(f"\n✅ NPZ data loading example completed successfully!")
-        print(f"📁 Processed data saved to: {output_path.absolute()}")
-        print(f"🎯 You can now use this data for further agricultural ML analysis!")
+        print(f"\nNPZ data loading example completed successfully!")
+        print(f"Processed data saved to: {output_path.absolute()}")
+        print(f"You can now use this data for further agricultural ML analysis!")
         
     except Exception as e:
-        print(f"❌ Error in NPZ data loading example: {e}")
+        print(f"Error in NPZ data loading example: {e}")
         import traceback
         traceback.print_exc()
 
