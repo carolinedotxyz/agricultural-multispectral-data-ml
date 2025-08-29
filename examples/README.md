@@ -103,7 +103,7 @@ Use these examples to:
 - **Learn NPZ data handling** patterns
 - **Develop your own analysis pipelines**
 - **Validate tool functionality**
-- **Understand agricultural data formats**
+- **Understand  agricultural data formats**
 - **Practice multi-spectral data processing**
 
 ## Requirements
