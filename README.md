@@ -31,13 +31,6 @@ This showcase demonstrates skills in:
 - Crop-level data preparation and validation  
 - Remote sensing and geospatial workflows  
 - Domain-specific quality thresholds and checks  
-
-### Software Engineering
-- Clean and modular codebase  
-- Error handling and validation routines  
-- Documentation and reproducible examples  
-- Unit tests and maintainable structure  
-
 ---
 
 ## Repository Structure
@@ -53,7 +46,7 @@ Agricultural_ML_Showcase/
 ├── notebooks/                          # Jupyter notebooks
 ├── docs/                               # Documentation
 ├── examples/                           # Example scripts and workflows
-├── tests/                              # Unit tests
+├── tests/                              # Unit tests [WIP]
 ├── requirements.txt                    # Python dependencies
 ├── setup.py                            # Package setup
 └── README.md                           # This file
@@ -118,4 +111,4 @@ print(report)
 
 ---
 
-*This showcase demonstrates expertise in **agricultural data analysis for ML**, emphasizing data preparation, validation, and high-quality workflows.*  
+*This showcase demonstrates examples in **agricultural data analysis for ML**, emphasizing data preparation, validation, and high-quality workflows.*  
