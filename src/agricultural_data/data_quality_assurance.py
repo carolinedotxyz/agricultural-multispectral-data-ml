@@ -57,7 +57,7 @@ class AgriculturalDataQualityAssurance:
         Returns:
             Dictionary containing structure validation results
         """
-        print(f"🔍 Validating dataset structure: {dataset_path}")
+        print(f"Validating dataset structure: {dataset_path}")
         
         validation_result = {
             "dataset_path": dataset_path,
@@ -227,7 +227,7 @@ class AgriculturalDataQualityAssurance:
         Returns:
             Dictionary containing integrity validation results
         """
-        print(f"🔒 Validating data integrity: {dataset_path}")
+        print(f"Validating data integrity: {dataset_path}")
         
         integrity_result = {
             "dataset_path": dataset_path,
@@ -368,7 +368,7 @@ class AgriculturalDataQualityAssurance:
             Formatted quality report string
         """
         report_lines = []
-        report_lines.append("🔍 AGRICULTURAL DATA QUALITY ASSURANCE REPORT")
+        report_lines.append("AGRICULTURAL DATA QUALITY ASSURANCE REPORT")
         report_lines.append("=" * 60)
         report_lines.append(f"Dataset: {structure_validation.get('dataset_path', 'Unknown')}")
         report_lines.append(f"Timestamp: {structure_validation.get('timestamp', 'Unknown')}")
@@ -379,56 +379,56 @@ class AgriculturalDataQualityAssurance:
         integrity_score = integrity_validation.get('integrity_score', 0.0)
         overall_score = (structure_score + integrity_score) / 2
         
-        report_lines.append("📊 OVERALL QUALITY SUMMARY")
+        report_lines.append("OVERALL QUALITY SUMMARY")
         report_lines.append("-" * 30)
         report_lines.append(f"Structure Score: {structure_score}/10")
         report_lines.append(f"Integrity Score: {integrity_score}/10")
         report_lines.append(f"Overall Score: {overall_score:.1f}/10")
-        report_lines.append(f"Quality Status: {'✅ PASS' if overall_score >= 7.0 else '❌ FAIL'}")
+        report_lines.append(f"Quality Status: {'PASS' if overall_score >= 7.0 else 'FAIL'}")
         report_lines.append("")
         
         # Structure Validation Details
-        report_lines.append("🏗️  STRUCTURE VALIDATION")
+        report_lines.append("STRUCTURE VALIDATION")
         report_lines.append("-" * 30)
-        report_lines.append(f"Status: {'✅ Valid' if structure_validation.get('structure_valid', False) else '❌ Invalid'}")
+        report_lines.append(f"Status: {'Valid' if structure_validation.get('structure_valid', False) else 'Invalid'}")
         
         if structure_validation.get('issues'):
             report_lines.append(f"Issues: {len(structure_validation['issues'])}")
             for issue in structure_validation['issues']:
-                report_lines.append(f"  ❌ {issue}")
+                report_lines.append(f"  - {issue}")
         
         if structure_validation.get('warnings'):
             report_lines.append(f"Warnings: {len(structure_validation['warnings'])}")
             for warning in structure_validation['warnings'][:5]:  # Show first 5
-                report_lines.append(f"  ⚠️  {warning}")
+                report_lines.append(f"  - {warning}")
         
         # Integrity Validation Details
-        report_lines.append("\n🔒 INTEGRITY VALIDATION")
+        report_lines.append("\nINTEGRITY VALIDATION")
         report_lines.append("-" * 30)
-        report_lines.append(f"Status: {'✅ Valid' if integrity_validation.get('integrity_valid', False) else '❌ Invalid'}")
+        report_lines.append(f"Status: {'Valid' if integrity_validation.get('integrity_valid', False) else 'Invalid'}")
         
         if integrity_validation.get('issues'):
             report_lines.append(f"Issues: {len(integrity_validation['issues'])}")
             for issue in integrity_validation['issues']:
-                report_lines.append(f"  ❌ {issue}")
+                report_lines.append(f"  - {issue}")
         
         if integrity_validation.get('warnings'):
             report_lines.append(f"Warnings: {len(integrity_validation['warnings'])}")
             for warning in integrity_validation['warnings'][:5]:  # Show first 5
-                report_lines.append(f"  ⚠️  {warning}")
+                report_lines.append(f"  - {warning}")
         
         # Recommendations
-        report_lines.append("\n💡 RECOMMENDATIONS")
+        report_lines.append("\nRECOMMENDATIONS")
         report_lines.append("-" * 30)
         
         if overall_score >= 9.0:
-            report_lines.append("✅ Dataset quality is excellent. Ready for ML training.")
+            report_lines.append("Dataset quality is excellent. Ready for ML training.")
         elif overall_score >= 7.0:
-            report_lines.append("✅ Dataset quality is acceptable. Minor issues should be addressed.")
+            report_lines.append("Dataset quality is acceptable. Minor issues should be addressed.")
         elif overall_score >= 5.0:
-            report_lines.append("⚠️  Dataset quality is moderate. Several issues need attention.")
+            report_lines.append("Dataset quality is moderate. Several issues need attention.")
         else:
-            report_lines.append("❌ Dataset quality is poor. Major issues must be resolved before use.")
+            report_lines.append("Dataset quality is poor. Major issues must be resolved before use.")
         
         if structure_validation.get('issues'):
             report_lines.append("  - Fix structural issues before proceeding")
@@ -486,21 +486,21 @@ class AgriculturalDataQualityAssurance:
         with open(output_path, 'w') as f:
             json.dump(detailed_report, f, indent=2, default=str)
         
-        print(f"💾 Quality report saved to: {text_path}")
-        print(f"📄 Detailed report saved to: {output_path}")
+        print(f"Quality report saved to: {text_path}")
+        print(f"Detailed report saved to: {output_path}")
         
         return str(output_path)
 
 def main():
     """Example usage of the AgriculturalDataQualityAssurance system."""
-    print("🔍 Agricultural Data Quality Assurance Example")
+    print("Agricultural Data Quality Assurance Example")
     print("=" * 60)
     
     # Initialize quality assurance system
     qa_system = AgriculturalDataQualityAssurance()
     
     # Example: Create synthetic dataset for validation
-    print("\n📊 Creating synthetic dataset for quality validation...")
+    print("\nCreating synthetic dataset for quality validation...")
     
     # Generate synthetic data
     N, H, W = 100, 64, 64
@@ -517,24 +517,24 @@ def main():
     dataset_path = "./synthetic_agricultural_dataset.npz"
     np.savez_compressed(dataset_path, **synthetic_data)
     
-    print(f"✅ Created synthetic dataset: {dataset_path}")
+    print(f"Created synthetic dataset: {dataset_path}")
     
     # Run quality assurance
-    print("\n1️⃣ Validating dataset structure...")
+    print("\n1. Validating dataset structure...")
     structure_validation = qa_system.validate_dataset_structure(dataset_path)
     
-    print("\n2️⃣ Validating data integrity...")
+    print("\n2. Validating data integrity...")
     integrity_validation = qa_system.validate_data_integrity(dataset_path)
     
-    print("\n3️⃣ Generating quality report...")
+    print("\n3. Generating quality report...")
     quality_report = qa_system.generate_quality_report(structure_validation, integrity_validation)
     
     # Save report
-    print("\n4️⃣ Saving quality report...")
+    print("\n4. Saving quality report...")
     qa_system.save_quality_report(structure_validation, integrity_validation)
     
     # Display summary
-    print(f"\n📊 Quality Summary:")
+    print(f"\nQuality Summary:")
     print(f"  Structure Score: {structure_validation.get('structure_score', 0)}/10")
     print(f"  Integrity Score: {integrity_validation.get('integrity_score', 0)}/10")
     print(f"  Overall Score: {(structure_validation.get('structure_score', 0) + integrity_validation.get('integrity_score', 0)) / 2:.1f}/10")
@@ -543,7 +543,7 @@ def main():
     if os.path.exists(dataset_path):
         os.remove(dataset_path)
     
-    print("\n✅ Agricultural data quality assurance example completed!")
+    print("\nAgricultural data quality assurance example completed!")
 
 if __name__ == "__main__":
     main()

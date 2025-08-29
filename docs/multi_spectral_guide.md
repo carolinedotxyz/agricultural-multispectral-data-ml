@@ -2,11 +2,11 @@
 
 A comprehensive guide to processing and analyzing multi-spectral agricultural imagery, including RGB and NDVI data fusion techniques.
 
-## 🌾 **Overview**
+## Overview
 
 Multi-spectral agricultural data combines multiple wavelength bands to provide comprehensive information about crop health, soil conditions, and environmental factors. This guide covers the essential techniques for processing and analyzing such data.
 
-## 🔴🟢 **Data Modalities**
+## Data Modalities
 
 ### **RGB Imagery**
 - **Red Channel**: Sensitive to chlorophyll absorption
@@ -22,7 +22,7 @@ Multi-spectral agricultural data combines multiple wavelength bands to provide c
   - **0.2 to 0.6**: Moderate vegetation density
   - **0.6 to 1.0**: High vegetation density
 
-## 📊 **Data Processing Pipeline**
+## Data Processing Pipeline
 
 ### **1. Data Loading and Validation**
 ```python
@@ -61,7 +61,7 @@ ndvi_analysis = analyzer.analyze_ndvi_data(ndvi_data)
 correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_data)
 ```
 
-## 🛠️ **Quality Assurance**
+## Quality Assurance
 
 ### **Data Validation Checklist**
 - [ ] **File Structure**: All required keys present (rgb, ndvi, cloud_mask)
@@ -78,7 +78,7 @@ correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_d
 - **5.0-6.9**: Moderate quality, several issues
 - **<5.0**: Poor quality, major issues must be resolved
 
-## 📈 **Analysis Techniques**
+## Analysis Techniques
 
 ### **Statistical Analysis**
 - **Central Tendency**: Mean, median, mode
@@ -96,7 +96,7 @@ correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_d
 - **Change Detection**: Before/after comparisons
 - **Trend Analysis**: Long-term vegetation changes
 
-## 🔍 **Common Issues and Solutions**
+## Common Issues and Solutions
 
 ### **Data Quality Issues**
 1. **High Cloud Coverage**
@@ -128,7 +128,7 @@ correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_d
    - **Challenge**: Maintaining consistency across modalities
    - **Solution**: Synchronized data collection, validation pipelines
 
-## 📋 **Best Practices**
+## Best Practices
 
 ### **Data Collection**
 - **Synchronization**: Ensure all modalities collected simultaneously
@@ -148,7 +148,7 @@ correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_d
 - **Scalability**: Design for large-scale processing
 - **Validation**: Multiple validation approaches and cross-checking
 
-## 🚀 **Advanced Techniques**
+## Advanced Techniques
 
 ### **Data Fusion**
 - **Early Fusion**: Combine modalities at input level
@@ -165,7 +165,7 @@ correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_d
 - **Optimization**: Real-time quality assessment and filtering
 - **Deployment**: Production-ready processing pipelines
 
-## 📚 **Additional Resources**
+## Additional Resources
 
 ### **Academic References**
 - Remote Sensing in Agriculture
@@ -183,7 +183,7 @@ correlation_analysis = analyzer.analyze_multi_modal_correlation(rgb_data, ndvi_d
 - **Aerial**: Drone imagery, aircraft surveys
 - **Ground**: Field sensors, IoT devices
 
-## 🔗 **Integration with Agricultural ML**
+## Integration with Agricultural ML
 
 ### **Crop Classification**
 - **Multi-modal Features**: Combine RGB and NDVI for better classification
